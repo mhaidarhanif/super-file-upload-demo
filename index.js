@@ -59,14 +59,14 @@ conn.once("open", function () {
   // delete the image
   app.delete("/files/:filename", function (req, res) {
     gfs.exist({ filename: req.params.filename }, function (err, found) {
-      if (err) return res.send("Error occured")
+      if (err) return res.send("Error occured!", err)
       if (found) {
         gfs.remove({ filename: req.params.filename }, function (err) {
-          if (err) return res.send("Error occured")
+          if (err) return res.send("Error occured!", err)
           res.send("Image deleted!")
         })
       } else {
-        res.send("No image found with that title")
+        res.send("No image found with that title!")
       }
     })
   })
