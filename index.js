@@ -5,7 +5,7 @@ const multer = require("multer")
 const upload = multer({ dest: "./uploads" })
 const mongoose = require("mongoose")
 
-mongoose.connect("mongodb://localhost/images")
+mongoose.connect("mongodb://localhost/super-file-upload-demo")
 const conn = mongoose.connection
 
 const Grid = require("gridfs-stream")

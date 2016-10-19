@@ -4,6 +4,8 @@
   "description": "Super file upload demo.",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
+    "dev": "nodemon .",
     "test": "node ."
   },
   "repository": {
