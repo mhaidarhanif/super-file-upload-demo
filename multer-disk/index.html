@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Super File Upload Demo</title>
+  </head>
+
+  <body>
+    <form id="uploadForm" enctype="multipart/form-data" action="/api/images" method="post">
+      <input type="file" name="userImage">
+      <input type="submit" value="Upload Image" name="submit">
+      <span id="#status"></span>
+      <div class="">
+        <a id="open" href="">Open Uploaded File</a>
+      </div>
+    </form>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        $('#uploadForm').submit(function() {
+          $("#status").empty().text(`File is uploading...`)
+          $(this).ajaxSubmit({
+            error: function(xhr) {
+              status(`Error: ${xhr.status}`)
+            },
+            success: function(res) {
+              $("#status").empty()
+              $("#open").attr("href", `uploads/${res}`)
+            }
+          })
+          return false
+        })
+      })
+    </script>
+  </body>
+
+</html>

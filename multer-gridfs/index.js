@@ -76,6 +76,7 @@ app.set("view engine", "ejs")
 app.set("views", "./views")
 
 if (!module.parent) {
-  app.listen(3000)
-  console.log('Express on localhost:3000')
+  app.listen(3000, function () {
+    console.log('Express on localhost:3000')
+  })
 }
