@@ -21,22 +21,35 @@ conn.once("open", function () {
   })
 
   // second parameter is multer middleware.
-  app.post("/", upload.single("avatar"), function (req, res, next) {
-    //create a gridfs-stream into which we pipe multer's temporary file saved in uploads. After which we delete multer's temp file.
+  app.post("/", upload.single("image"), function (req, res, next) {
+    /*
+    Create a gridfs-stream into which we pipe multer's temporary file saved in uploads. After which we delete multer's temp file.
+    */
     var writestream = gfs.createWriteStream({
       filename: req.file.originalname
     })
 
-    // pipe multer's temp file /uploads/filename into the stream we created above. On end deletes the temporary file.
+    /*
+    Pipe multer's temp file /uploads/filename into the stream we created above. On end deletes the temporary file.
+    */
+    var name = req.file.originalname
     fs.createReadStream("./uploads/" + req.file.filename)
-      .on("end", function () { fs.unlink("./uploads/" + req.file.filename, function (err) { res.send("success") }) })
-      .on("err", function () { res.send("Error uploading image") })
+      .on("end", function () {
+        fs.unlink("./uploads/" + req.file.filename, function (err) {
+          res.send(`Success! Open /files/${name}`)
+        })
+      })
+      .on("err", function (err) {
+        res.send("Error! Image upload is failed", err)
+      })
       .pipe(writestream)
   })
 
   // sends the image we saved by filename
   app.get("/files/:filename", function (req, res) {
-    var readstream = gfs.createReadStream({ filename: req.params.filename })
+    var readstream = gfs.createReadStream({
+      filename: req.params.filename
+    })
     readstream.on("error", function (err) {
       res.send("No image found with that title")
     })
@@ -44,7 +57,7 @@ conn.once("open", function () {
   })
 
   // delete the image
-  app.get("/delete/:filename", function (req, res) {
+  app.delete("/files/:filename", function (req, res) {
     gfs.exist({ filename: req.params.filename }, function (err, found) {
       if (err) return res.send("Error occured")
       if (found) {
@@ -64,4 +77,5 @@ app.set("views", "./views")
 
 if (!module.parent) {
   app.listen(3000)
+  console.log('Express on localhost:3000')
 }
