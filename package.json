@@ -21,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/mhaidarh/super-file-upload-demo/issues"
   },
-  "homepage": "https://github.com/mhaidarh/super-file-upload-demo#readme"
+  "homepage": "https://github.com/mhaidarh/super-file-upload-demo#readme",
+  "dependencies": {
+    "ejs": "2.5.2",
+    "express": "4.14.0",
+    "gridfs-stream": "1.1.1",
+    "mongoose": "4.6.4",
+    "multer": "1.2.0"
+  }
 }
