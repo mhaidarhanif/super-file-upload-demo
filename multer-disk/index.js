@@ -3,8 +3,6 @@ const multer = require('multer')
 const app = express()
 const cors = require('cors')
 
-app.use(express.static('public'))
-
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, `public/uploads`)
@@ -13,11 +11,11 @@ const storage = multer.diskStorage({
     callback(null, `${Date.now()}-${file.originalname}`)
   }
 })
-
 const upload = multer({ storage: storage }).single('userImage')
 
-app.use(cors())
+app.use('/', express.static('public'))
 app.use('/semantic-ui-css', express.static(__dirname + '/node_modules/semantic-ui-css/'))
+app.use(cors())
 
 app.get('/', function (req, res) {
   res.sendFile(`${__dirname}/index.html`)

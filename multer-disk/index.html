@@ -20,18 +20,20 @@
     <div class="ui container">
 
       <form id="uploadForm" enctype="multipart/form-data" action="/api/images" method="post">
-        <div class="ui center aligned segment">
+        <div class="ui green center aligned segment">
           <h2 class="ui header">Action</h2>
-          <label for="file" class="blue ui icon button"><i class="file icon"></i>Choose File</label>
-          <input type="file" name="userImage" id="file" style="display:none">
+          <label id="fileLabel" for="file" class="blue ui icon button"><i class="file icon"></i>Choose File</label>
+          <input id="file" type="file" name="userImage" style="display:none">
+          <span id="fileName">test.png</span>
+
           <div class="ui horizontal divider">then</div>
-          <input type="submit" class="red ui button" value="Upload Image" name="submit">
+          <input type="submit" class="teal ui button" value="Upload Image" name="submit" disabled>
         </div>
 
-        <div class="ui red segment">
+        <div class="ui yellow center aligned segment">
           <h2 class="ui header">Status</h2>
           <span id="status"></span>
-          <span id="uploaded" style="display: none;" class="ui small rounded image">
+          <span id="uploaded" style="display:none" class="ui rounded image">
             <a href=""><img class="" src="" alt=""></a>
           </span>
         </div>
@@ -44,14 +46,24 @@
 
     <script>
       $(document).ready(function() {
+        $('input:file').change(
+          function() {
+            let filename = $(this).val().split('\\').pop()
+            if (filename) {
+              $('input:submit').attr('disabled', false)
+              $('#fileName').html(filename)
+            }
+          }
+        )
+
         $('#uploadForm').submit(function() {
           $("#status").empty().text(`File is uploading...`)
           $(this).ajaxSubmit({
-            error: function(xhr) {
-              status(`Error: ${xhr.status}`)
+            error: function(res) {
+              status(`Error: ${res.status}`)
             },
             success: function(res) {
-              console.log(res);
+              console.log(res)
               $("#status").empty()
               $("#uploaded").show()
               $("#uploaded a").attr("href", `uploads/${res}`)
