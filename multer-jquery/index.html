@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <form id="uploadForm" enctype="multipart/form-data" action="/api/upload" method="post">
+    <form id="uploadForm" enctype="multipart/form-data" action="http://localhost:3000/api/upload" method="post">
       <input type="file" name="userPhoto" />
       <input type="submit" value="Upload Image" name="submit">
       <span id="status"></span>
@@ -28,7 +28,6 @@
             },
             success: function(response) {
               $("#status").empty().text(response)
-              console.log(response)
             }
           })
           return false // disable the page refresh

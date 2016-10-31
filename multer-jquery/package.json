@@ -17,6 +17,7 @@
   "author": "M Haidar Hanif <npm@mhaidarhanif.com> (https://mhaidarhanif.com)",
   "license": "MIT",
   "dependencies": {
+    "cors": "2.8.1",
     "express": "4.14.0",
     "multer": "1.2.0"
   },
