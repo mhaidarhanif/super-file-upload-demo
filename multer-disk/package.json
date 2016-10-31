@@ -25,12 +25,13 @@
   },
   "homepage": "https://github.com/mhaidarh/super-file-upload-demo#readme",
   "dependencies": {
+    "cors": "^2.8.1",
     "express": "*",
     "multer": "*"
   },
   "devDependencies": {
-    "should": "*",
     "mocha": "*",
+    "should": "*",
     "supertest": "*"
   }
 }

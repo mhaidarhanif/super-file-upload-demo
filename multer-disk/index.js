@@ -1,6 +1,7 @@
 const express = require('express')
 const multer = require('multer')
 const app = express()
+const cors = require('cors')
 
 app.use(express.static('public'))
 
@@ -14,6 +15,9 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ storage: storage }).single('userImage')
+
+app.use(cors())
+app.use('/semantic-ui-css', express.static(__dirname + '/node_modules/semantic-ui-css/'))
 
 app.get('/', function (req, res) {
   res.sendFile(`${__dirname}/index.html`)
@@ -29,6 +33,5 @@ app.post('/api/images', function (req, res) {
 })
 
 app.listen(3000, function () {
-  console.log
-('Express on localhost:3000')
+  console.log('Express on localhost:3000')
 })
