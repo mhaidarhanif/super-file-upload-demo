@@ -27,7 +27,8 @@
   "dependencies": {
     "cors": "^2.8.1",
     "express": "*",
-    "multer": "*"
+    "multer": "*",
+    "semantic-ui-css": "^2.2.4"
   },
   "devDependencies": {
     "mocha": "*",
