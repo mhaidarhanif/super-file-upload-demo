@@ -1,0 +1,17 @@
+{
+  "name": "multer-jquery",
+  "version": "0.1.0",
+  "description": "File upload with Multer and jQuery",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "multer",
+    "jquery",
+    "file",
+    "upload"
+  ],
+  "author": "M Haidar Hanif <npm@mhaidarhanif.com> (https://mhaidarhanif.com)",
+  "license": "MIT"
+}
