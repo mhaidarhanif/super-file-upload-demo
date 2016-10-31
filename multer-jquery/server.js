@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + "/index.html")
 })
 
-app.post('/api/photo', function (req, res) {
+app.post('/api/upload', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
       return res.end("Error uploading file.")
