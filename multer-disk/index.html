@@ -7,6 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="semantic-ui-css/semantic.min.css" media="screen" title="no title" charset="utf-8">
     <title>Super File Upload Demo</title>
+    <style media="screen">
+      .ui.container {
+        margin-top: 2em;
+        max-width: 500px !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -14,11 +20,20 @@
     <div class="ui container">
 
       <form id="uploadForm" enctype="multipart/form-data" action="/api/images" method="post">
-        <input type="file" name="userImage">
-        <input type="submit" value="Upload Image" name="submit">
-        <span id="#status"></span>
-        <div class="">
-          <a id="open" href="">Open Uploaded File</a>
+        <div class="ui center aligned segment">
+          <h2 class="ui header">Action</h2>
+          <label for="file" class="blue ui icon button"><i class="file icon"></i>Choose File</label>
+          <input type="file" name="userImage" id="file" style="display:none">
+          <div class="ui horizontal divider">then</div>
+          <input type="submit" class="red ui button" value="Upload Image" name="submit">
+        </div>
+
+        <div class="ui red segment">
+          <h2 class="ui header">Status</h2>
+          <span id="status"></span>
+          <span id="uploaded" style="display: none;" class="ui small rounded image">
+            <a href=""><img class="" src="" alt=""></a>
+          </span>
         </div>
       </form>
 
@@ -36,8 +51,11 @@
               status(`Error: ${xhr.status}`)
             },
             success: function(res) {
+              console.log(res);
               $("#status").empty()
-              $("#open").attr("href", `uploads/${res}`)
+              $("#uploaded").show()
+              $("#uploaded a").attr("href", `uploads/${res}`)
+              $("#uploaded img").attr("src", `uploads/${res}`)
             }
           })
           return false
